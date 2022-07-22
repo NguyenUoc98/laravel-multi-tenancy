@@ -4,6 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Spatie\Multitenancy\Models\Tenant;
 
 class Kernel extends ConsoleKernel
 {
@@ -16,6 +17,11 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+
+        // Schedule for all tenant
+        Tenant::all()->eachCurrent(function(Tenant $tenant) use ($schedule) {
+//            $schedule->run($tenant->callback(fn() => cache()->flush()))->daily();
+        });
     }
 
     /**
