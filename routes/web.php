@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::domain(config('app.domain'))->group(function () {
+    Route::get('/', function () {
+        dd(\Illuminate\Support\Facades\DB::table('users')->get());
+    });
+});
+
 Route::get('/', function () {
-    return view('welcome');
+    dd(\Illuminate\Support\Facades\DB::table('users')->get());
 });

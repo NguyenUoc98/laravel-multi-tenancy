@@ -10,6 +10,7 @@
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^2.14.1",
         "laravel/tinker": "^2.7",
+        "orchid/platform": "^12.6",
         "spatie/laravel-multitenancy": "^2.0"
     },
     "require-dev": {

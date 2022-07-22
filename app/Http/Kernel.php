@@ -36,8 +36,9 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
-            \Spatie\Multitenancy\Http\Middleware\NeedsTenant::class,
-            \Spatie\Multitenancy\Http\Middleware\EnsureValidTenantSession::class,
+            \App\Http\Middleware\LandlordAsFallback::class,
+            \App\Http\Middleware\NeedsTenant::class,
+            \App\Http\Middleware\EnsureValidTenantSession::class,
         ],
 
         'api' => [

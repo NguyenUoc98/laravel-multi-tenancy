@@ -18,6 +18,11 @@ return [
     'name' => env('APP_NAME', 'Laravel'),
 
     /*
+     * Domain for landlord admin
+     */
+    'domain' => 'sangnayangi.landlord.local',
+
+    /*
     |--------------------------------------------------------------------------
     | Application Environment
     |--------------------------------------------------------------------------
