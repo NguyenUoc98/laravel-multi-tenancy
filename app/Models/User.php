@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\Hash;
 use Orchid\Platform\Models\User as Authenticatable;
+use Orchid\Support\Facades\Dashboard;
 use Spatie\Multitenancy\Models\Concerns\UsesTenantConnection;
 
 class User extends Authenticatable
@@ -66,4 +68,23 @@ class User extends Authenticatable
         'updated_at',
         'created_at',
     ];
+
+    /**
+     * @param string $name
+     * @param string $email
+     * @param string $password
+     *
+     * @throws \Throwable
+     */
+    public static function createAdmin(string $name, string $email, string $password)
+    {
+        throw_if(static::where('email', $email)->exists(), 'User exist');
+
+        static::create([
+            'name'        => $name,
+            'email'       => $email,
+            'password'    => Hash::make($password),
+            'permissions' => Dashboard::getAllowAllPermission(['System', 'Main']),
+        ]);
+    }
 }

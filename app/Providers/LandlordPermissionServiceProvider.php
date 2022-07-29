@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Landlord\Tenant;
 use Illuminate\Support\ServiceProvider;
 use Orchid\Platform\Dashboard;
 use Orchid\Platform\ItemPermission;
@@ -25,9 +26,11 @@ class LandlordPermissionServiceProvider extends ServiceProvider
      */
     public function boot(Dashboard $dashboard)
     {
-        $permissions = ItemPermission::group('System')
-            ->addPermission('platform.systems.tenants', 'Tenants');
+        if (!Tenant::checkCurrent()) {
+            $permissions = ItemPermission::group('Tenant')
+                ->addPermission('platform.systems.tenants', 'Tenants');
 
-        $dashboard->registerPermissions($permissions);
+            $dashboard->registerPermissions($permissions);
+        }
     }
 }

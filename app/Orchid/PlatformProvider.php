@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Orchid;
 
+use App\Models\Landlord\Tenant;
+use Illuminate\Support\Arr;
 use Orchid\Platform\Dashboard;
 use Orchid\Platform\ItemPermission;
 use Orchid\Platform\OrchidServiceProvider;
@@ -27,7 +29,7 @@ class PlatformProvider extends OrchidServiceProvider
      */
     public function registerMainMenu(): array
     {
-        return [
+        $menus = [
 //            Menu::make('Example screen')
 //                ->icon('monitor')
 //                ->route('platform.example')
@@ -83,11 +85,6 @@ class PlatformProvider extends OrchidServiceProvider
 //                    return Dashboard::version();
 //                }, Color::DARK()),
 
-            Menu::make(__('Tenants'))
-                ->icon('server')
-                ->route('platform.systems.tenants')
-                ->permission('platform.systems.users'),
-
             Menu::make(__('Users'))
                 ->icon('user')
                 ->route('platform.systems.users')
@@ -99,6 +96,14 @@ class PlatformProvider extends OrchidServiceProvider
                 ->route('platform.systems.roles')
                 ->permission('platform.systems.roles'),
         ];
+
+        if (!Tenant::checkCurrent()) {
+            $menus = Arr::prepend($menus, Menu::make(__('Tenants'))
+                ->icon('server')
+                ->route('platform.systems.tenants')
+                ->permission('platform.systems.users'));
+        }
+        return $menus;
     }
 
     /**
