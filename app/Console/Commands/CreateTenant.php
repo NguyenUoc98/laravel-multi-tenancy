@@ -2,11 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Tenant;
+use App\Models\Landlord\Tenant;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class CreateTenant extends Command
 {
@@ -35,17 +32,15 @@ class CreateTenant extends Command
     {
         $tenantName   = $this->option('name');
         $tenantDomain = $this->option('domain');
-        if (Tenant::query()->whereDomain($tenantDomain)->exists()) {
+        if (Tenant::query()->whereDomain($tenantDomain)->orWhere('name', $tenantName)->exists()) {
             $this->error('Tenant with domain: ' . $tenantDomain . ' is existed');
             return 1;
         }
 
         try {
-            $database = Str::replace(['.', '-'], '_', $tenantDomain);
-            $tenant   = Tenant::query()->create([
-                'name'     => $tenantName,
-                'domain'   => $tenantDomain,
-                'database' => $database
+            $tenant = Tenant::query()->create([
+                'name'   => $tenantName,
+                'domain' => $tenantDomain
             ]);
         } catch (\Exception $exception) {
             $this->error('Create is failed. Error: ' . $exception->getMessage());

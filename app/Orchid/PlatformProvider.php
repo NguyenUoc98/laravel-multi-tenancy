@@ -83,6 +83,11 @@ class PlatformProvider extends OrchidServiceProvider
 //                    return Dashboard::version();
 //                }, Color::DARK()),
 
+            Menu::make(__('Tenants'))
+                ->icon('server')
+                ->route('platform.systems.tenants')
+                ->permission('platform.systems.users'),
+
             Menu::make(__('Users'))
                 ->icon('user')
                 ->route('platform.systems.users')

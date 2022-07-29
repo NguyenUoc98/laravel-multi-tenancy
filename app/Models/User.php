@@ -3,11 +3,11 @@
 namespace App\Models;
 
 use Orchid\Platform\Models\User as Authenticatable;
-use Spatie\Multitenancy\Models\Concerns\UsesLandlordConnection;
+use Spatie\Multitenancy\Models\Concerns\UsesTenantConnection;
 
 class User extends Authenticatable
 {
-    use UsesLandlordConnection;
+    use UsesTenantConnection;
 
     /**
      * The attributes that are mass assignable.

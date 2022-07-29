@@ -17,7 +17,7 @@ return [
     |
     */
 
-    'domain' => env('DASHBOARD_DOMAIN', 'sangnayangi.landlord.local'),
+    'domain' => env('DASHBOARD_DOMAIN', ''),
 
     /*
     |--------------------------------------------------------------------------

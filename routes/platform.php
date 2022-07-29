@@ -95,21 +95,52 @@ Route::screen('roles', RoleListScreen::class)
             ->parent('platform.index')
             ->push(__('Roles'), route('platform.systems.roles'));
     });
+//
+//// Example...
+//Route::screen('example', ExampleScreen::class)
+//    ->name('platform.example')
+//    ->breadcrumbs(function (Trail $trail) {
+//        return $trail
+//            ->parent('platform.index')
+//            ->push('Example screen');
+//    });
+//
+//Route::screen('example-fields', ExampleFieldsScreen::class)->name('platform.example.fields');
+//Route::screen('example-layouts', ExampleLayoutsScreen::class)->name('platform.example.layouts');
+//Route::screen('example-charts', ExampleChartsScreen::class)->name('platform.example.charts');
+//Route::screen('example-editors', ExampleTextEditorsScreen::class)->name('platform.example.editors');
+//Route::screen('example-cards', ExampleCardsScreen::class)->name('platform.example.cards');
+//Route::screen('example-advanced', ExampleFieldsAdvancedScreen::class)->name('platform.example.advanced');
 
-// Example...
-Route::screen('example', ExampleScreen::class)
-    ->name('platform.example')
+// Tenants
+Route::screen('tenants', \App\Orchid\Screens\Tenant\TenantListScreen::class)
+    ->name('platform.systems.tenants')
     ->breadcrumbs(function (Trail $trail) {
         return $trail
             ->parent('platform.index')
-            ->push('Example screen');
+            ->push(__('Tenants'), route('platform.systems.tenants'));
     });
 
-Route::screen('example-fields', ExampleFieldsScreen::class)->name('platform.example.fields');
-Route::screen('example-layouts', ExampleLayoutsScreen::class)->name('platform.example.layouts');
-Route::screen('example-charts', ExampleChartsScreen::class)->name('platform.example.charts');
-Route::screen('example-editors', ExampleTextEditorsScreen::class)->name('platform.example.editors');
-Route::screen('example-cards', ExampleCardsScreen::class)->name('platform.example.cards');
-Route::screen('example-advanced', ExampleFieldsAdvancedScreen::class)->name('platform.example.advanced');
+Route::screen('tenants/create', \App\Orchid\Screens\Tenant\TenantEditScreen::class)
+    ->name('platform.systems.tenants.create')
+    ->breadcrumbs(function (Trail $trail) {
+        return $trail
+            ->parent('platform.systems.tenants')
+            ->push(__('Create'), route('platform.systems.tenants.create'));
+    });
 
-//Route::screen('idea', Idea::class, 'platform.screens.idea');
+Route::screen('tenants/{tenant}/edit', \App\Orchid\Screens\Tenant\TenantEditScreen::class)
+    ->name('platform.systems.tenants.edit')
+    ->breadcrumbs(function (Trail $trail, $tenant) {
+        return $trail
+            ->parent('platform.systems.tenants')
+            ->push(__('Tenant'), route('platform.systems.tenants.edit', $tenant));
+    });
+
+Route::screen('tenants/{tenant}/create-admin', \App\Orchid\Screens\Tenant\CreateAdminScreen::class)
+    ->name('platform.systems.tenants.create_admin')
+    ->breadcrumbs(function (Trail $trail, $tenant) {
+        return $trail
+            ->parent('platform.systems.tenants')
+            ->push(__('Create admin'), route('platform.systems.tenants.create_admin', $tenant));
+    });

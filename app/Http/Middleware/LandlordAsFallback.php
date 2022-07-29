@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Tenant;
 use Closure;
 use Illuminate\Http\Request;
 
@@ -21,7 +20,8 @@ class LandlordAsFallback
 
             // if Host is 'laravel.test' set DB connection to 'landlord'
             config(['database.default' => 'landlord']);
-
+            config(['platform.guard' => 'admin']);
+            auth()->shouldUse('admin');
         }
         return $next($request);
     }

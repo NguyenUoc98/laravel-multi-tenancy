@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\Tenant;
+use App\Models\Landlord\Tenant;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
