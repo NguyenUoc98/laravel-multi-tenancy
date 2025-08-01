@@ -20,7 +20,7 @@ return [
     /*
      * Domain for landlord admin
      */
-    'domain' => 'sangnayangi.landlord.local',
+    'domain' => 'multi-tenancy.test',
 
     /*
     |--------------------------------------------------------------------------

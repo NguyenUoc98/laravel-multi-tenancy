@@ -8,9 +8,10 @@
     @vite(['resources/css/app.css'])
 </head>
 <body class="antialiased">
-<div class="relative flex items-top justify-center bg-gray-100 dark:bg-gray-900 sm:items-center">
+<div
+    class="relative flex items-top justify-center bg-gray-100 dark:bg-gray-900 sm:items-center min-h-screen bg-[url('/images/bg_home_mobile.webp')] lg:bg-[url('/images/bg_home.webp')] bg-cover lg:bg-right bg-center">
     @if (Route::has('login'))
-        <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block space-x-2">
+        <div class="fixed lg:top-0 lg:right-0 bottom-[5%] px-6 py-4 space-x-2">
             @auth
                 <a href="{{ url('/dashboard') }}"
                    class="border border-gray-400 dark:text-gray-500 px-4 py-2 rounded-md text-gray-700 text-sm">Dashboard</a>
@@ -25,10 +26,6 @@
             @endauth
         </div>
     @endif
-
-    <div class="w-full h-full">
-        <img class="object-cover" src="{{ asset('images/bg_home.webp') }}">
-    </div>
 </div>
 </body>
 </html>
